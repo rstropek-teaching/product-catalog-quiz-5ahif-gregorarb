@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using ProductCatalog.Models;
 using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProductCatalog.Services
 {
@@ -29,6 +27,10 @@ namespace ProductCatalog.Services
             return response;
         }
 
+        /// <summary>
+        /// Get all records of the table to show it in a list
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Product> GetAll()
         {
             IRestResponse response = AccessDatabase(Method.GET);
@@ -37,6 +39,11 @@ namespace ProductCatalog.Services
             return productsAscending.ToArray();
         }
 
+        /// <summary>
+        /// Get a record by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Product GetById(int id)
         {
             IEnumerable<Product> products = GetAll();
@@ -44,7 +51,7 @@ namespace ProductCatalog.Services
         }
 
         /// <summary>
-        /// The same as the AccessDatabase-Method but you have to add a parameter to the request
+        /// Add a new product to the database
         /// </summary>
         /// <param name="product">product to add</param>
         public void AddProduct(Product product)
